@@ -1,0 +1,22 @@
+<svg width="800" height="640" viewBox="0 0 800 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="640" rx="40" fill="#F8F9FA" />
+  <circle cx="650" cy="120" r="80" fill="#F4B400" opacity="0.15" />
+  <path d="M150 520C150 480 190 440 230 440H520C560 440 600 480 600 520V560H150V520Z" fill="#0A2540" opacity="0.08" />
+  <rect x="120" y="140" width="520" height="320" rx="35" fill="white" stroke="#DDE2E8" stroke-width="2" />
+  <path d="M170 190H610" stroke="#0A2540" stroke-width="4" stroke-linecap="round" />
+  <path d="M170 240H530" stroke="#0A2540" stroke-width="4" stroke-linecap="round" />
+  <path d="M170 290H520" stroke="#0A2540" stroke-width="4" stroke-linecap="round" />
+  <path d="M170 340H530" stroke="#0A2540" stroke-width="4" stroke-linecap="round" />
+  <rect x="160" y="390" width="260" height="90" rx="18" fill="#F4B400" opacity="0.18" />
+  <path d="M210 410H390" stroke="#0A2540" stroke-width="4" stroke-linecap="round" />
+  <path d="M210 450H350" stroke="#0A2540" stroke-width="4" stroke-linecap="round" />
+  <circle cx="540" cy="210" r="44" fill="#0A2540" opacity="0.08" />
+  <path d="M520 278C520 285.732 514.732 291 507 291H505C497.268 291 492 285.732 492 278V236C492 228.268 497.268 223 505 223H507C514.732 223 520 228.268 520 236V278Z" fill="#0A2540" />
+  <path d="M540 256C540 298.091 506.091 332 464 332C421.909 332 388 298.091 388 256C388 213.909 421.909 180 464 180C506.091 180 540 213.909 540 256Z" fill="#0A2540" opacity="0.08" />
+  <path d="M480 286C480 297.046 471.046 306 460 306C448.954 306 440 297.046 440 286C440 274.954 448.954 266 460 266C471.046 266 480 274.954 480 286Z" fill="#0A2540" />
+  <path d="M450 100C450 118.092 435.092 133 417 133H265C246.908 133 232 118.092 232 100V92C232 73.9077 246.908 59 265 59H417C435.092 59 450 73.9077 450 92V100Z" fill="#0A2540" opacity="0.14" />
+  <path d="M360 120L385 170L410 120" stroke="#0A2540" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M240 520C240 492 264 468 292 468H404C432 468 456 492 456 520V560H240V520Z" fill="#0A2540" opacity="0.12" />
+  <path d="M116 114C116 90.4315 136.432 70 160 70H280C303.568 70 324 90.4315 324 114V174H116V114Z" fill="#F4B400" opacity="0.14" />
+  <path d="M620 430C620 405.49 641.49 384 666 384H728C752.51 384 774 405.49 774 430V500H620V430Z" fill="#0A2540" opacity="0.08" />
+</svg>

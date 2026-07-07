@@ -1,0 +1,129 @@
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MessageCircle, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
+
+export default function ContactSection() {
+  const [statusMessage, setStatusMessage] = useState<string>('');
+  const [hasError, setHasError] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const fullName = formData.get('fullName')?.toString().trim();
+    const email = formData.get('email')?.toString().trim();
+    const phone = formData.get('phone')?.toString().trim();
+    const message = formData.get('message')?.toString().trim();
+
+    if (!fullName || !email || !phone || !message) {
+      setHasError(true);
+      setStatusMessage('Please fill in all fields before sending.');
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setHasError(true);
+      setStatusMessage('Please enter a valid email address.');
+      return;
+    }
+
+    setHasError(false);
+    setStatusMessage('Thank you! Your message has been received.');
+    event.currentTarget.reset();
+  };
+
+  return (
+    <section id="contact" className="bg-white py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <motion.div initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[32px] border border-slate-200 bg-[#F8F9FA] p-10 shadow-soft">
+            <span className="inline-flex rounded-full bg-secondary/10 px-4 py-2 text-sm font-semibold text-secondary">Contact</span>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight text-primary sm:text-4xl">Get in touch with Project Clinic</h2>
+            <p className="mt-6 text-base leading-8 text-slate-600">Send your inquiry or request a consultation to begin your academic support journey.</p>
+
+            <div className="mt-10 space-y-5 text-slate-700">
+              <div className="flex items-center gap-4 rounded-3xl bg-white p-5 shadow-sm">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-secondary/10 text-secondary">
+                  <MessageCircle size={20} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">WhatsApp</p>
+                  <p className="text-sm text-slate-600">+234 800 000 0000</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 rounded-3xl bg-white p-5 shadow-sm">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-secondary/10 text-secondary">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">Phone</p>
+                  <p className="text-sm text-slate-600">+234 700 000 0000</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 rounded-3xl bg-white p-5 shadow-sm">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-secondary/10 text-secondary">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">Email</p>
+                  <p className="text-sm text-slate-600">hello@projectclinic.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 flex items-center gap-3 text-slate-500">
+              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-sm transition hover:bg-secondary/10">
+                <Facebook size={18} />
+              </a>
+              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-sm transition hover:bg-secondary/10">
+                <Twitter size={18} />
+              </a>
+              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-sm transition hover:bg-secondary/10">
+                <Linkedin size={18} />
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-soft">
+            <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
+              <div>
+                <label htmlFor="fullName" className="mb-3 block text-sm font-semibold text-slate-700">Full Name</label>
+                <input id="fullName" name="fullName" type="text" placeholder="Your full name" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+              </div>
+              <div>
+                <label htmlFor="email" className="mb-3 block text-sm font-semibold text-slate-700">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+              </div>
+              <div>
+                <label htmlFor="phone" className="mb-3 block text-sm font-semibold text-slate-700">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+              </div>
+              <div>
+                <label htmlFor="message" className="mb-3 block text-sm font-semibold text-slate-700">Message</label>
+                <textarea id="message" name="message" rows={5} placeholder="Tell us about your academic need" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+              </div>
+              <button type="submit" className="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-4 text-sm font-semibold text-primary transition hover:bg-yellow-400">
+                Send Message
+              </button>
+              {statusMessage ? (
+                <p className={`text-sm ${hasError ? 'text-rose-600' : 'text-slate-700'}`}>{statusMessage}</p>
+              ) : null}
+            </form>
+          </motion.div>
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="mt-12 overflow-hidden rounded-[32px] border border-slate-200 bg-[#F8F9FA] p-16 text-center shadow-soft">
+          <div className="mx-auto flex max-w-xl flex-col items-center justify-center gap-5">
+            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+              <MapPin size={20} />
+            </div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Google Maps Placeholder</p>
+            <p className="max-w-xl text-sm leading-7 text-slate-600">A modern contact experience ready for map integration when the website is deployed.</p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
