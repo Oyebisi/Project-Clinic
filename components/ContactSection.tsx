@@ -1,37 +1,87 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MessageCircle, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function ContactSection() {
   const [statusMessage, setStatusMessage] = useState<string>('');
   const [hasError, setHasError] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<{ fullName?: string; email?: string; phone?: string; message?: string }>({});
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setStatusMessage('');
+    setHasError(false);
+    setFieldErrors({});
+
     const formData = new FormData(event.currentTarget);
     const fullName = formData.get('fullName')?.toString().trim();
     const email = formData.get('email')?.toString().trim();
     const phone = formData.get('phone')?.toString().trim();
     const message = formData.get('message')?.toString().trim();
+    const website = formData.get('website')?.toString().trim();
 
-    if (!fullName || !email || !phone || !message) {
+    const errors: { fullName?: string; email?: string; phone?: string; message?: string } = {};
+    if (!fullName) errors.fullName = 'Please enter your full name.';
+    if (!email) errors.email = 'Please enter your email address.';
+    if (email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) errors.email = 'Please enter a valid email address.';
+    }
+    if (!phone) errors.phone = 'Please enter your phone number.';
+    if (!message) errors.message = 'Please enter your message.';
+
+    if (website) {
+      return setStatusMessage('Spam detected.');
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       setHasError(true);
-      setStatusMessage('Please fill in all fields before sending.');
+      setStatusMessage('Please fix the highlighted fields before sending.');
       return;
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setHasError(true);
-      setStatusMessage('Please enter a valid email address.');
-      return;
-    }
+    setIsSending(true);
 
-    setHasError(false);
-    setStatusMessage('Thank you! Your message has been received.');
-    event.currentTarget.reset();
+    try {
+        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+        const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+        const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+        if (!serviceId || !templateId || !publicKey) {
+          setHasError(true);
+          setStatusMessage(
+            'Email service is not configured. Set NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in .env.local.'
+          );
+          setIsSending(false);
+          return;
+        }
+
+        const templateParams = {
+          fullName,
+          email,
+          phone,
+          message,
+        };
+
+        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+        setHasError(false);
+        setFieldErrors({});
+        setStatusMessage('Thank you! Your message has been sent successfully.');
+        event.currentTarget.reset();
+    } catch (error) {
+      console.error('Contact form error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'There was a problem sending your message. Please try again later.';
+      setHasError(true);
+      setStatusMessage(errorMessage);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -88,24 +138,61 @@ export default function ContactSection() {
 
           <motion.div initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-soft">
             <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input id="website" name="website" type="text" autoComplete="off" tabIndex={-1} />
+              </div>
+
               <div>
                 <label htmlFor="fullName" className="mb-3 block text-sm font-semibold text-slate-700">Full Name</label>
-                <input id="fullName" name="fullName" type="text" placeholder="Your full name" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+                <input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  placeholder="Your full name"
+                  aria-invalid={!!fieldErrors.fullName}
+                  className={`w-full rounded-3xl border px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20 ${fieldErrors.fullName ? 'border-rose-500' : 'border-slate-200 bg-slate-50'}`}
+                />
+                {fieldErrors.fullName ? <p className="mt-2 text-sm text-rose-600">{fieldErrors.fullName}</p> : null}
               </div>
               <div>
                 <label htmlFor="email" className="mb-3 block text-sm font-semibold text-slate-700">Email</label>
-                <input id="email" name="email" type="email" placeholder="you@example.com" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  aria-invalid={!!fieldErrors.email}
+                  className={`w-full rounded-3xl border px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20 ${fieldErrors.email ? 'border-rose-500' : 'border-slate-200 bg-slate-50'}`}
+                />
+                {fieldErrors.email ? <p className="mt-2 text-sm text-rose-600">{fieldErrors.email}</p> : null}
               </div>
               <div>
                 <label htmlFor="phone" className="mb-3 block text-sm font-semibold text-slate-700">Phone Number</label>
-                <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+234 800 000 0000"
+                  aria-invalid={!!fieldErrors.phone}
+                  className={`w-full rounded-3xl border px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20 ${fieldErrors.phone ? 'border-rose-500' : 'border-slate-200 bg-slate-50'}`}
+                />
+                {fieldErrors.phone ? <p className="mt-2 text-sm text-rose-600">{fieldErrors.phone}</p> : null}
               </div>
               <div>
                 <label htmlFor="message" className="mb-3 block text-sm font-semibold text-slate-700">Message</label>
-                <textarea id="message" name="message" rows={5} placeholder="Tell us about your academic need" className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20" />
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  placeholder="Tell us about your academic need"
+                  aria-invalid={!!fieldErrors.message}
+                  className={`w-full rounded-3xl border px-5 py-4 text-sm text-slate-900 outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20 ${fieldErrors.message ? 'border-rose-500' : 'border-slate-200 bg-slate-50'}`}
+                />
+                {fieldErrors.message ? <p className="mt-2 text-sm text-rose-600">{fieldErrors.message}</p> : null}
               </div>
-              <button type="submit" className="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-4 text-sm font-semibold text-primary transition hover:bg-yellow-400">
-                Send Message
+              <button disabled={isSending} type="submit" className={`inline-flex items-center justify-center rounded-full bg-secondary px-6 py-4 text-sm font-semibold text-primary transition ${isSending ? 'cursor-not-allowed opacity-70' : 'hover:bg-yellow-400'}`}>
+                {isSending ? 'Sending...' : 'Send Message'}
               </button>
               {statusMessage ? (
                 <p className={`text-sm ${hasError ? 'text-rose-600' : 'text-slate-700'}`}>{statusMessage}</p>
