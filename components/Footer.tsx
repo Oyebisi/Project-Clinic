@@ -41,8 +41,8 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">Contact</h4>
             <div className="mt-6 space-y-4 text-sm text-slate-300">
-              <p className="flex items-center gap-3"><Phone size={16} /> +234 800 000 0000</p>
-              <p className="flex items-center gap-3"><Mail size={16} /> hello@projectclinic.com</p>
+              <p className="flex items-center gap-3"><Phone size={16} /> +234 911 303 5363</p>
+              <p className="flex items-center gap-3"><Mail size={16} /> projectclinic01@gamil.com</p>
             </div>
             <div className="mt-6 flex items-center gap-3">
               <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-slate-700 text-slate-100 transition hover:bg-secondary hover:text-primary"><Facebook size={16} /></a>

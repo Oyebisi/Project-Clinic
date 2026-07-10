@@ -29,7 +29,7 @@ export default function HeroSection() {
             <a href="#contact" className="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-yellow-400">
               Get Started <ArrowRight className="ml-3 h-4 w-4" />
             </a>
-            <a href="https://wa.me/2348000000000" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
+            <a href="https://wa.link/akv6mj" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
               <MessageCircle className="mr-3 h-4 w-4" /> Chat on WhatsApp
             </a>
           </div>

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MessageCircle, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 export default function ContactSection() {
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [statusMessage, setStatusMessage] = useState<string>('');
   const [hasError, setHasError] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -73,7 +74,7 @@ export default function ContactSection() {
         setHasError(false);
         setFieldErrors({});
         setStatusMessage('Thank you! Your message has been sent successfully.');
-        event.currentTarget.reset();
+        formRef.current?.reset();
     } catch (error) {
       console.error('Contact form error:', error);
       const errorMessage = error instanceof Error ? error.message : 'There was a problem sending your message. Please try again later.';
@@ -100,7 +101,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold">WhatsApp</p>
-                  <p className="text-sm text-slate-600">+234 800 000 0000</p>
+                  <p className="text-sm text-slate-600">+234 911 303 5363</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 rounded-3xl bg-white p-5 shadow-sm">
@@ -109,7 +110,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold">Phone</p>
-                  <p className="text-sm text-slate-600">+234 700 000 0000</p>
+                  <p className="text-sm text-slate-600">+234 911 303 5363</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 rounded-3xl bg-white p-5 shadow-sm">
@@ -118,7 +119,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold">Email</p>
-                  <p className="text-sm text-slate-600">hello@projectclinic.com</p>
+                  <p className="text-sm text-slate-600">projectclinic01@gamil.com</p>
                 </div>
               </div>
             </div>
@@ -137,7 +138,7 @@ export default function ContactSection() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-soft">
-            <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
+            <form ref={formRef} className="grid gap-5" onSubmit={handleSubmit} noValidate>
               <div className="hidden" aria-hidden="true">
                 <label htmlFor="website">Website</label>
                 <input id="website" name="website" type="text" autoComplete="off" tabIndex={-1} />
