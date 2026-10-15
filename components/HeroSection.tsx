@@ -1,7 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
+import bookImage from '../images/Book-for-website.jpg';
 import NavBar from './NavBar';
 
 const heroStats = [
@@ -46,16 +48,14 @@ export default function HeroSection() {
 
         <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative mx-auto w-full max-w-xl overflow-hidden rounded-[42px] bg-white p-6 shadow-soft sm:p-10">
           <div className="absolute inset-x-0 top-0 h-3 bg-gradient-to-r from-secondary via-[#ffc35f] to-secondary/80" />
-          <div className="relative flex h-full flex-col items-center justify-center gap-6 py-10">
-            <div className="flex h-72 w-full items-center justify-center rounded-[32px] bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#ffffff] p-6 shadow-inner">
-              <div className="flex h-full w-full items-center justify-center rounded-[24px] bg-primary/5">
-                <div className="grid h-full w-full place-items-center text-center text-slate-500">
-                  <p className="text-4xl font-bold text-primary/90">Project Clinic</p>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-slate-500">
-                    Academic support for research, university work, and polished presentations.
-                  </p>
-                </div>
-              </div>
+          <div className="relative flex h-full flex-col items-center justify-center gap-6 py-4">
+            <div className="h-[360px] w-full overflow-hidden rounded-[32px] bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-white shadow-inner sm:h-[420px]">
+              <Image
+                src={bookImage}
+                alt="Student working on academic research with books and a laptop"
+                className="h-full w-full object-cover"
+                priority
+              />
             </div>
           </div>
         </motion.div>
