@@ -24,7 +24,7 @@ export default function HeroSection() {
             Professional Academic Research Support
           </h1>
           <p className="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-            Project Clinic provides professional support with research projects, proposals, seminar papers, editing, formatting, plagiarism checking, data analysis, and presentation preparation. We help students prepare high-quality academic work while encouraging originality and compliance with their institution's academic standards.
+            Project Clinic provides professional support with research projects, proposals, seminar papers, editing, formatting, plagiarism checking, data analysis, and presentation preparation. We help students prepare high-quality academic work while encouraging originality and compliance with their institution&apos;s academic standards.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">

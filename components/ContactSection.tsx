@@ -71,11 +71,10 @@ export default function ContactSection() {
 
         // Initialize EmailJS with the public key (safe to expose client-side)
         try {
-          // some versions of emailjs require init; calling init is idempotent
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          if (emailjs.init) emailjs.init(publicKey);
-        } catch (e) {
+          if (typeof emailjs.init === 'function') {
+            emailjs.init(publicKey);
+          }
+        } catch {
           // ignore init errors and fallback to passing publicKey to send()
         }
 

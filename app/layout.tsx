@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 export const metadata: Metadata = {
   title: 'Project Clinic | Academic Research Support',
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <WhatsAppButton />
+      </body>
     </html>
   );
 }
