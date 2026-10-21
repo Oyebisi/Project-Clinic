@@ -4,16 +4,20 @@ const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}'
+    './pages/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-  extend: {
-    fontFamily: {
-      sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+    extend: {
+      colors: {
+        primary: '#0A2540',   // navy
+        secondary: '#F4B400', // orange/gold
+      },
+      fontFamily: {
+        sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+      },
     },
   },
-},
-  plugins: []
+  plugins: [],
 };
 
 export default config;

@@ -1,6 +1,8 @@
 'use client';
 
 import { ArrowRight, Facebook, Linkedin, Twitter, Phone, Mail } from 'lucide-react';
+import Logo from '../public/assets/images/project-clinic-logo.png';
+import WhatsAppIcon from '../public/assets/svg/whatsapp.svg';
 
 export default function Footer() {
   return (
@@ -9,10 +11,9 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.5fr_0.9fr_0.9fr_1.2fr]">
           <div className="space-y-5">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-secondary text-primary">PC</div>
-              <div>
-                <p className="text-lg font-semibold">Project Clinic</p>
-                <p className="text-sm text-slate-200">Your trusted academic research support partner.</p>
+              <div className="inline-flex items-center gap-2 p-auto">
+                <img src={Logo.src} alt="Project Clinic Logo" className="h-12 w-auto" />
+                <span className="font-bold text-2xl">Project</span> <span className="font-light text-2xl">Clinic</span>
               </div>
             </div>
             <p className="max-w-lg text-sm leading-7 text-slate-300">Project Clinic provides reliable academic research support for students, including guidance, editing, formatting, data analysis, and presentation preparation.</p>
@@ -45,9 +46,9 @@ export default function Footer() {
               <p className="flex items-center gap-3"><Mail size={16} /> projectclinic01@gamil.com</p>
             </div>
             <div className="mt-6 flex items-center gap-3">
-              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-slate-700 text-slate-100 transition hover:bg-secondary hover:text-primary"><Facebook size={16} /></a>
-              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-slate-700 text-slate-100 transition hover:bg-secondary hover:text-primary"><Twitter size={16} /></a>
-              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-slate-700 text-slate-100 transition hover:bg-secondary hover:text-primary"><Linkedin size={16} /></a>
+              <a href="https://wa.link/akv6mj" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-slate-700 ...">
+                <img src={WhatsAppIcon.src} alt="WhatsApp" className="h-5 w-auto" style={{ filter: 'invert(1)' }} />
+              </a>
             </div>
           </div>
         </div>

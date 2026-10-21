@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import Logo from '../public/images/project-clinic-logo.png';
+import Logo from '../public/assets/images/project-clinic-logo.png';
 
 
 const navItems = [
@@ -31,8 +31,9 @@ export default function NavBar() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all ${isSticky ? 'backdrop-blur-xl bg-white/90 shadow-soft' : 'bg-transparent'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <a href="#home" className="flex items-center gap-3 text-sm font-semibold text-slate-900">
-          <div>
-            <img src={Logo.src} alt="Project Clinic Logo" className="h-12 w-auto" />
+          <div className="inline-flex items-center gap-2 p-auto">
+            <img src={Logo.src} alt="Project Clinic Logo" className="h-8 w-auto" />
+            <span className="font-bold">Project</span> <span className="font-light">Clinic</span>
           </div>
         </a>
 

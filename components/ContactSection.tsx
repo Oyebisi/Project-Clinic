@@ -2,8 +2,11 @@
 
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MessageCircle, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Mail, Phone, MessageCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import Testimonials from './Testimonials';
+import WhatsAppIcon from '../public/assets/svg/whatsapp.svg';
+
 
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -132,18 +135,6 @@ export default function ContactSection() {
                 </div>
               </div>
             </div>
-
-            <div className="mt-10 flex items-center gap-3 text-slate-500">
-              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-sm transition hover:bg-secondary/10">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-sm transition hover:bg-secondary/10">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-sm transition hover:bg-secondary/10">
-                <Linkedin size={18} />
-              </a>
-            </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-soft">
@@ -211,15 +202,7 @@ export default function ContactSection() {
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="mt-12 overflow-hidden rounded-[32px] border border-slate-200 bg-[#F8F9FA] p-16 text-center shadow-soft">
-          <div className="mx-auto flex max-w-xl flex-col items-center justify-center gap-5">
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-secondary/10 text-secondary">
-              <MapPin size={20} />
-            </div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Google Maps Placeholder</p>
-            <p className="max-w-xl text-sm leading-7 text-slate-600">A modern contact experience ready for map integration when the website is deployed.</p>
-          </div>
-        </motion.div>
+        <Testimonials />
       </div>
     </section>
   );
