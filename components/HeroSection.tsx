@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
-import bookImage from '../images/Book-for-website.jpg';
+import bookImage from '../public/images/Book-for-website.jpg';
 import NavBar from './NavBar';
 
 const heroStats = [

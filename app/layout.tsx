@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: 'Project Clinic | Academic Research Support',
   description: 'Project Clinic offers trusted research guidance, editing, formatting, data analysis, and presentation preparation for students.',
   metadataBase: new URL('https://projectclinic.example.com'),
+  icons: {
+    icon: '/images/favicon.png',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png'
+  },
   openGraph: {
     title: 'Project Clinic | Academic Research Support',
     description: 'Trusted academic research support services for students.',
